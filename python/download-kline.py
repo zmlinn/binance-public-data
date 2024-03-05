@@ -103,6 +103,12 @@ if __name__ == "__main__":
     else:
         symbols = args.symbols
         num_symbols = len(symbols)
+    print("found {} symbols".format(num_symbols))
+
+    if args.symbol_endswith:
+        symbols = [symbol for symbol in symbols if symbol.endswith(args.symbol_endswith)]
+        num_symbols = len(symbols)
+    print("found {} symbols with suffix {}".format(num_symbols, args.symbol_endswith))
 
     if args.dates:
         dates = args.dates

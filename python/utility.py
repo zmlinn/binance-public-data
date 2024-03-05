@@ -162,6 +162,13 @@ def get_parser(parser_type):
     parser.add_argument(
         '-t', dest='type', required=True, choices=TRADING_TYPE,
         help='Valid trading types: {}'.format(TRADING_TYPE))
+    parser.add_argument(
+        '--symbol_endswith', dest='symbol_endswith',
+        help='Download symbols that ends with the given string', default=None)
+    parser.add_argument(
+        '--symbol_contains', dest='symbol_contains',
+        help='Download symbols that contains the given string', default=None)
+
 
     if parser_type == 'klines':
         parser.add_argument(
