@@ -41,6 +41,7 @@ def download_file(base_path, file_name, date_range=None, folder=None):
         date_range = date_range.replace(" ", "_")
         base_path = os.path.join(base_path, date_range)
     save_path = get_destination_dir(os.path.join(base_path, file_name), folder)
+    save_path_tmp = save_path + '.tmp'
     save_path_not_found = save_path + '.404'
     if os.path.exists(save_path) or os.path.exists(save_path_not_found):
         print("\nfile already exists! {}".format(save_path))
@@ -58,9 +59,9 @@ def download_file(base_path, file_name, date_range=None, folder=None):
             length = int(length)
             blocksize = max(4096, length // 100)
 
-        with open(save_path, 'wb') as out_file:
+        with open(save_path_tmp, 'wb') as out_file:
             dl_progress = 0
-            print("\nFile Download: {}".format(save_path))
+            print("\nFile Download: {}".format(save_path_tmp))
             while True:
                 buf = dl_file.read(blocksize)
                 if not buf:
@@ -70,6 +71,8 @@ def download_file(base_path, file_name, date_range=None, folder=None):
                 done = int(50 * dl_progress / length)
                 sys.stdout.write("\r[%s%s]" % ('#' * done, '.' * (50 - done)))
                 sys.stdout.flush()
+
+        os.rename(save_path_tmp, save_path)
 
     except Exception as e:
         print("\nFile not found: {}, {}".format(download_url, e))
@@ -168,7 +171,6 @@ def get_parser(parser_type):
     parser.add_argument(
         '--symbol_contains', dest='symbol_contains',
         help='Download symbols that contains the given string', default=None)
-
 
     if parser_type == 'klines':
         parser.add_argument(
