@@ -12,8 +12,7 @@ import sys
 import pandas as pd
 
 from enums import *
-from utility import download_file, get_all_symbols, get_parser, convert_to_date_object, \
-    get_path
+from utility import download_file, get_all_symbols, get_parser, convert_to_date_object, get_path
 
 
 def download_monthly_klines(trading_type, symbols, num_symbols, intervals, years, months, start_date, end_date, folder, checksum):
