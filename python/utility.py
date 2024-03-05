@@ -171,6 +171,10 @@ def get_parser(parser_type):
     parser.add_argument(
         '--symbol_contains', dest='symbol_contains',
         help='Download symbols that contains the given string', default=None)
+    # njobs
+    parser.add_argument(
+        '--njobs', dest='njobs', default=1, type=int,
+        help='Number of jobs to run in parallel, default 1')
 
     if parser_type == 'klines':
         parser.add_argument(

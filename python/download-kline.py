@@ -53,8 +53,7 @@ def download_monthly_klines(trading_type, symbols, num_symbols, intervals, years
         current += 1
 
 
-def download_daily_klines(trading_type, symbols, num_symbols, intervals, dates, start_date, end_date, folder, checksum):
-    current = 0
+def download_daily_klines(trading_type, symbols, num_symbols, intervals, dates, start_date, end_date, folder, checksum, njobs=1):
     date_range = None
 
     if start_date and end_date:
@@ -74,7 +73,8 @@ def download_daily_klines(trading_type, symbols, num_symbols, intervals, dates, 
     intervals = list(set(intervals) & set(DAILY_INTERVALS))
     print("Found {} symbols".format(num_symbols))
 
-    for symbol in symbols:
+    def download_one_symbol(symbol):
+        current = 0
         print("[{}/{}] - start download daily {} klines ".format(current + 1, num_symbols, symbol))
         for interval in intervals:
             print("[{}/{}] - start download daily {} klines for interval {}".format(current + 1, num_symbols, symbol, interval))
@@ -90,8 +90,10 @@ def download_daily_klines(trading_type, symbols, num_symbols, intervals, dates, 
                         checksum_path = get_path(trading_type, "klines", "daily", symbol, interval)
                         checksum_file_name = "{}-{}-{}.zip.CHECKSUM".format(symbol.upper(), interval, date)
                         download_file(checksum_path, checksum_file_name, date_range, folder)
-
         current += 1
+
+    from joblib import Parallel, delayed
+    Parallel(n_jobs=njobs, backend="threading")(delayed(download_one_symbol)(symbol) for symbol in symbols)
 
 
 if __name__ == "__main__":
@@ -122,4 +124,4 @@ if __name__ == "__main__":
         if args.skip_monthly == 0:
             download_monthly_klines(args.type, symbols, num_symbols, args.intervals, args.years, args.months, args.startDate, args.endDate, args.folder, args.checksum)
     if args.skip_daily == 0:
-        download_daily_klines(args.type, symbols, num_symbols, args.intervals, dates, args.startDate, args.endDate, args.folder, args.checksum)
+        download_daily_klines(args.type, symbols, num_symbols, args.intervals, dates, args.startDate, args.endDate, args.folder, args.checksum, args.njobs)
