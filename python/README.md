@@ -6,34 +6,35 @@
 
 `export STORE_DIRECTORY=<your desired path>`
 
-This will configure the default storing directory of the downloaded data. This can be 
-overwritten <br/> by setting an argument(example given below). 
+This will configure the default storing directory of the downloaded data. This can be
+overwritten <br/> by setting an argument(example given below).
 
 ### Download klines
+
 `python3 download-kline.py -t <market_type>` <br/>
 
-Running this command will download all available monthly and daily **spot**, **USD-M Futures** or **COIN-M Futures** kline data for all symbols and intervals from **2020-01-01**. 
+Running this command will download all available monthly and daily **spot**, **USD-M Futures** or **COIN-M Futures** kline data for all symbols and intervals from **2020-01-01**.
 
 #### Running with arguments
 
 These are the available arguments that can be used when running `download-kline.py`<br>
 Some arguments come with a default value if not declared.
 
-| Argument        | Explanation | Default | Mandatory |      
-| :---------------: | ---------------- | :----------------: | :----------------: |
-| -t              | Market type: **spot**, **um** (USD-M Futures), **cm** (COIN-M Futures) | spot | Yes |
-| -s              | Single **symbol** or multiple **symbols** separated by space | All symbols | No |
-| -i              | single kline **interval** or multiple **intervals** separated by space      | All intervals | No |
-| -y              | Single **year** or multiple **years** separated by space| All available years from 2020 to current year | No |
-| -m              | Single **month** or multiple **months** separated by space | All available months | No |
-| -d              | single **date** or multiple **dates** separated by space    | All available dates from 2020-01-01 | No |
-| -startDate      | **Starting date** to download in [YYYY-MM-DD] format    | 2020-01-01 | No |
-| -endDate        | **Ending date** to download in [YYYY-MM-DD] format     | Current date | No |
-| -skip-monthly   | 1 to skip downloading of monthly data | 0 | No |
-| -skip-daily     | 1 to skip downloading of daily data | 0 | No |
-| -folder         | **Directory** to store the downloaded data    | Current directory | No |
-| -c              | 1 to download **checksum file** | 0 | No |
-| -h              | show help messages| - | No |
+|   Argument    | Explanation                                                            |                    Default                    | Mandatory |      
+|:-------------:|------------------------------------------------------------------------|:---------------------------------------------:|:---------:|
+|      -t       | Market type: **spot**, **um** (USD-M Futures), **cm** (COIN-M Futures) |                     spot                      |    Yes    |
+|      -s       | Single **symbol** or multiple **symbols** separated by space           |                  All symbols                  |    No     |
+|      -i       | single kline **interval** or multiple **intervals** separated by space |                 All intervals                 |    No     |
+|      -y       | Single **year** or multiple **years** separated by space               | All available years from 2020 to current year |    No     |
+|      -m       | Single **month** or multiple **months** separated by space             |             All available months              |    No     |
+|      -d       | single **date** or multiple **dates** separated by space               |      All available dates from 2020-01-01      |    No     |
+|  -startDate   | **Starting date** to download in [YYYY-MM-DD] format                   |                  2020-01-01                   |    No     |
+|   -endDate    | **Ending date** to download in [YYYY-MM-DD] format                     |                 Current date                  |    No     |
+| -skip-monthly | 1 to skip downloading of monthly data                                  |                       0                       |    No     |
+|  -skip-daily  | 1 to skip downloading of daily data                                    |                       0                       |    No     |
+|    -folder    | **Directory** to store the downloaded data                             |               Current directory               |    No     |
+|      -c       | 1 to download **checksum file**                                        |                       0                       |    No     |
+|      -h       | show help messages                                                     |                       -                       |    No     |
 
 #### Example
 
@@ -54,20 +55,20 @@ Running this command will download all available monthly and daily **spot**, **U
 These are the available arguments that can be used when running `download-trade.py`<br>
 Some arguments come with a default value if not declared.
 
-| Argument        | Explanation | Default | Mandatory |       
-| :---------------: | ---------------- | :----------------: | :----------------: |
-| -t              | Market type: **spot**, **um** (USD-M Futures), **cm** (COIN-M Futures) | spot | Yes |
-| -s              | Single **symbol** or multiple **symbols** separated by space | All symbols | No |
-| -y              | Single **year** or multiple **years** separated by space| All available years from 2020 to current year | No |
-| -m              | Single **month** or multiple **months** separated by space | All available months | No |
-| -d              | single **date** or multiple **dates** separated by space    | All available dates from 2020-01-01 | No |
-| -startDate      | **Starting date** to download in [YYYY-MM-DD] format    | 2020-01-01 | No |
-| -endDate        | **Ending date** to download in [YYYY-MM-DD] format     | Current date | No |
-| -skip-monthly   | 1 to skip downloading of monthly data | 0 | No |
-| -skip-daily     | 1 to skip downloading of daily data | 0 | No |
-| -folder         | **Directory** to store the downloaded data    | Current directory | No |
-| -c              | 1 to download **checksum file** | 0 | No |
-| -h              | show help messages| - | No |
+|   Argument    | Explanation                                                            |                    Default                    | Mandatory |       
+|:-------------:|------------------------------------------------------------------------|:---------------------------------------------:|:---------:|
+|      -t       | Market type: **spot**, **um** (USD-M Futures), **cm** (COIN-M Futures) |                     spot                      |    Yes    |
+|      -s       | Single **symbol** or multiple **symbols** separated by space           |                  All symbols                  |    No     |
+|      -y       | Single **year** or multiple **years** separated by space               | All available years from 2020 to current year |    No     |
+|      -m       | Single **month** or multiple **months** separated by space             |             All available months              |    No     |
+|      -d       | single **date** or multiple **dates** separated by space               |      All available dates from 2020-01-01      |    No     |
+|  -startDate   | **Starting date** to download in [YYYY-MM-DD] format                   |                  2020-01-01                   |    No     |
+|   -endDate    | **Ending date** to download in [YYYY-MM-DD] format                     |                 Current date                  |    No     |
+| -skip-monthly | 1 to skip downloading of monthly data                                  |                       0                       |    No     |
+|  -skip-daily  | 1 to skip downloading of daily data                                    |                       0                       |    No     |
+|    -folder    | **Directory** to store the downloaded data                             |               Current directory               |    No     |
+|      -c       | 1 to download **checksum file**                                        |                       0                       |    No     |
+|      -h       | show help messages                                                     |                       -                       |    No     |
 
 #### Example
 
@@ -88,20 +89,20 @@ Running this command will download all available monthly and daily **spot**, **U
 These are the available arguments that can be used when running `download-aggTrade.py`<br>
 Some arguments come with a default value if not declared.
 
-| Argument        | Explanation | Default | Mandatory |       
-| :---------------: | ---------------- | :----------------: | :----------------: |
-| -t              | Market type: **spot**, **um** (USD-M Futures), **cm** (COIN-M Futures) | spot | Yes |
-| -s              | Single **symbol** or multiple **symbols** separated by space | All symbols | No |
-| -y              | Single **year** or multiple **years** separated by space| All available years from 2020 to current year | No |
-| -m              | Single **month** or multiple **months** separated by space | All available months | No |
-| -d              | single **date** or multiple **dates** separated by space    | All available dates from 2020-01-01 | No |
-| -startDate      | **Starting date** to download in [YYYY-MM-DD] format    | 2020-01-01 | No |
-| -endDate        | **Ending date** to download in [YYYY-MM-DD] format     | Current date | No |
-| -skip-monthly   | 1 to skip downloading of monthly data | 0 | No |
-| -skip-daily     | 1 to skip downloading of daily data | 0 | No |
-| -folder         | **Directory** to store the downloaded data    | Current directory | No |
-| -c              | 1 to download **checksum file** | 0 | No |
-| -h              | show help messages| - | No |
+|   Argument    | Explanation                                                            |                    Default                    | Mandatory |       
+|:-------------:|------------------------------------------------------------------------|:---------------------------------------------:|:---------:|
+|      -t       | Market type: **spot**, **um** (USD-M Futures), **cm** (COIN-M Futures) |                     spot                      |    Yes    |
+|      -s       | Single **symbol** or multiple **symbols** separated by space           |                  All symbols                  |    No     |
+|      -y       | Single **year** or multiple **years** separated by space               | All available years from 2020 to current year |    No     |
+|      -m       | Single **month** or multiple **months** separated by space             |             All available months              |    No     |
+|      -d       | single **date** or multiple **dates** separated by space               |      All available dates from 2020-01-01      |    No     |
+|  -startDate   | **Starting date** to download in [YYYY-MM-DD] format                   |                  2020-01-01                   |    No     |
+|   -endDate    | **Ending date** to download in [YYYY-MM-DD] format                     |                 Current date                  |    No     |
+| -skip-monthly | 1 to skip downloading of monthly data                                  |                       0                       |    No     |
+|  -skip-daily  | 1 to skip downloading of daily data                                    |                       0                       |    No     |
+|    -folder    | **Directory** to store the downloaded data                             |               Current directory               |    No     |
+|      -c       | 1 to download **checksum file**                                        |                       0                       |    No     |
+|      -h       | show help messages                                                     |                       -                       |    No     |
 
 #### Example
 
@@ -111,37 +112,36 @@ e.g download ETHUSDT BTCUSDT BNBBUSD spot aggTrades from year 2020, month of Feb
 e.g download all symbols' daily USD-M futures aggTrades from 2021-01-01 to 2021-02-02:
 `python3 download-aggTrade.py -t um -skip-monthly 1 -startDate 2021-01-01 -endDate 2021-02-02`
 
-
-### Futures-Only Data 
+### Futures-Only Data
 
 The 3 scripts below are only used for futures klines data.
-Running this command will download all available monthly and daily **USD-M Futures** or **COIN-M Futures** 
+Running this command will download all available monthly and daily **USD-M Futures** or **COIN-M Futures**
 indexPriceKlines, markPriceKlines or premiumPriceKlines for all symbols from **2020-01-01**.
 
 `python3 download-futures-indexPriceKlines.py -t <market_type>` <br/>
 `python3 download-futures-markPriceKlines.py -t <market_type>` <br/>
-`python3 download-futures-premiumPriceKlines.py -t <market_type>` 
+`python3 download-futures-premiumPriceKlines.py -t <market_type>`
 
 #### Running with arguments
 
 These are the available arguments that can be used when running the scripts.<br>
-**`-t`, type,  is a mandatory argument which consist of 2 different futures type: `um`, `cm`**. Some arguments come with a default value if not declared.
+**`-t`, type, is a mandatory argument which consist of 2 different futures type: `um`, `cm`**. Some arguments come with a default value if not declared.
 
-| Argument        | Explanation | Default | Mandatory |      
-| :---------------: | ---------------- | :----------------: | :----------------: |
-| -t              | Market type: **um** (USD-M Futures), **cm** (COIN-M Futures)| - | Yes |
-| -s              | Single **symbol** or multiple **symbols** separated by space | All symbols | No |
-| -i              | single kline **interval** or multiple **intervals** separated by space      | All intervals | No |
-| -y              | Single **year** or multiple **years** separated by space| All available years from 2020 to current year | No |
-| -m              | Single **month** or multiple **months** separated by space | All available months | No |
-| -d              | single **date** or multiple **dates** separated by space    | All available dates from 2020-01-01 | No |
-| -startDate      | **Starting date** to download in [YYYY-MM-DD] format    | 2020-01-01 | No |
-| -endDate        | **Ending date** to download in [YYYY-MM-DD] format     | Current date | No |
-| -skip-monthly   | 1 to skip downloading of monthly data | 0 | No |
-| -skip-daily     | 1 to skip downloading of daily data | 0 | No |
-| -folder         | **Directory** to store the downloaded data    | Current directory | No |
-| -c              | 1 to download **checksum file** | 0 | No |
-| -h              | show help messages| - | No |
+|   Argument    | Explanation                                                            |                    Default                    | Mandatory |      
+|:-------------:|------------------------------------------------------------------------|:---------------------------------------------:|:---------:|
+|      -t       | Market type: **um** (USD-M Futures), **cm** (COIN-M Futures)           |                       -                       |    Yes    |
+|      -s       | Single **symbol** or multiple **symbols** separated by space           |                  All symbols                  |    No     |
+|      -i       | single kline **interval** or multiple **intervals** separated by space |                 All intervals                 |    No     |
+|      -y       | Single **year** or multiple **years** separated by space               | All available years from 2020 to current year |    No     |
+|      -m       | Single **month** or multiple **months** separated by space             |             All available months              |    No     |
+|      -d       | single **date** or multiple **dates** separated by space               |      All available dates from 2020-01-01      |    No     |
+|  -startDate   | **Starting date** to download in [YYYY-MM-DD] format                   |                  2020-01-01                   |    No     |
+|   -endDate    | **Ending date** to download in [YYYY-MM-DD] format                     |                 Current date                  |    No     |
+| -skip-monthly | 1 to skip downloading of monthly data                                  |                       0                       |    No     |
+|  -skip-daily  | 1 to skip downloading of daily data                                    |                       0                       |    No     |
+|    -folder    | **Directory** to store the downloaded data                             |               Current directory               |    No     |
+|      -c       | 1 to download **checksum file**                                        |                       0                       |    No     |
+|      -h       | show help messages                                                     |                       -                       |    No     |
 
 e.g download Futures BTCUSDT USD-M indexPriceKlines
 `python3 download-futures-indexPriceKlines.py -t um -s BTCUSDT`
@@ -150,4 +150,4 @@ e.g download ETHUSDT BTCUSDT BNBUSDT USD-M markPriceKlines of 1 week from year 2
 `python3 download-futures-markPriceKlines.py -t um -s ETHUSDT BTCUSDT BNBUSDT -i 1w -y 2020 -m 02 12 -c 1`
 
 e.g download all symbols' daily COIN-M premiumPriceKlines of 1 minute interval from 2021-01-01 to 2021-02-02:
-`python3 download-futures-premiumPriceKlines.py -t cm -skip-monthly 1 -i 1m  -startDate 2021-01-01 -endDate 2021-02-02`
+`python3 download-futures-premiumPriceKlines.py -t cm -skip-monthly 1 -i 1m -startDate 2021-01-01 -endDate 2021-02-02`
