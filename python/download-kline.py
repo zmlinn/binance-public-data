@@ -73,13 +73,12 @@ def download_daily_klines(trading_type, symbols, num_symbols, intervals, dates, 
     intervals = list(set(intervals) & set(DAILY_INTERVALS))
     print("Found {} symbols".format(num_symbols))
 
-    def download_one_symbol(symbol):
-        current = 0
-        print("[{}/{}] - start download daily {} klines ".format(current + 1, num_symbols, symbol))
+    def download_one_symbol(symbol, symbol_i):
+        print("[{}/{}] - start download daily {} klines ".format(symbol_i, num_symbols, symbol))
         for interval in intervals:
-            print("[{}/{}] - start download daily {} klines for interval {}".format(current + 1, num_symbols, symbol, interval))
+            print("[{}/{}] - start download daily {} klines for interval {}".format(symbol_i, num_symbols, symbol, interval))
             for date in dates:
-                print("[{}/{}] - start download daily {} klines for date {}".format(current + 1, num_symbols, symbol, date))
+                print("[{}/{}] - start download daily {} klines for date {}".format(symbol_i, num_symbols, symbol, date))
                 current_date = convert_to_date_object(date)
                 if current_date >= start_date and current_date <= end_date:
                     path = get_path(trading_type, "klines", "daily", symbol, interval)
@@ -90,10 +89,9 @@ def download_daily_klines(trading_type, symbols, num_symbols, intervals, dates, 
                         checksum_path = get_path(trading_type, "klines", "daily", symbol, interval)
                         checksum_file_name = "{}-{}-{}.zip.CHECKSUM".format(symbol.upper(), interval, date)
                         download_file(checksum_path, checksum_file_name, date_range, folder)
-        current += 1
 
     from joblib import Parallel, delayed
-    Parallel(n_jobs=njobs, backend="threading")(delayed(download_one_symbol)(symbol) for symbol in symbols)
+    Parallel(n_jobs=njobs, backend="threading")(delayed(download_one_symbol)(symbol, symbol_i) for symbol, symbol_i in enumerate(symbols))
 
 
 if __name__ == "__main__":
