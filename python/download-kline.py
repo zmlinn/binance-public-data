@@ -77,7 +77,9 @@ def download_daily_klines(trading_type, symbols, num_symbols, intervals, dates, 
     for symbol in symbols:
         print("[{}/{}] - start download daily {} klines ".format(current + 1, num_symbols, symbol))
         for interval in intervals:
+            print("[{}/{}] - start download daily {} klines for interval {}".format(current + 1, num_symbols, symbol, interval))
             for date in dates:
+                print("[{}/{}] - start download daily {} klines for date {}".format(current + 1, num_symbols, symbol, date))
                 current_date = convert_to_date_object(date)
                 if current_date >= start_date and current_date <= end_date:
                     path = get_path(trading_type, "klines", "daily", symbol, interval)
