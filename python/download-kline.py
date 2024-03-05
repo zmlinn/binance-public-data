@@ -73,7 +73,7 @@ def download_daily_klines(trading_type, symbols, num_symbols, intervals, dates, 
     intervals = list(set(intervals) & set(DAILY_INTERVALS))
     print("Found {} symbols".format(num_symbols))
 
-    def download_one_symbol(symbol, symbol_i):
+    def download_one_symbol(symbol_i, symbol):
         print("[{}/{}] - start download daily {} klines ".format(symbol_i, num_symbols, symbol))
         for interval in intervals:
             print("[{}/{}] - start download daily {} klines for interval {}".format(symbol_i, num_symbols, symbol, interval))
@@ -91,7 +91,7 @@ def download_daily_klines(trading_type, symbols, num_symbols, intervals, dates, 
                         download_file(checksum_path, checksum_file_name, date_range, folder)
 
     from joblib import Parallel, delayed
-    Parallel(n_jobs=njobs, backend="threading")(delayed(download_one_symbol)(symbol, symbol_i) for symbol, symbol_i in enumerate(symbols))
+    Parallel(n_jobs=njobs, backend="threading")(delayed(download_one_symbol)(symbol_i, symbol) for symbol_i, symbol in enumerate(symbols))
 
 
 if __name__ == "__main__":
