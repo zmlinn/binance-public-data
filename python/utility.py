@@ -41,8 +41,8 @@ def download_file(base_path, file_name, date_range=None, folder=None):
         date_range = date_range.replace(" ", "_")
         base_path = os.path.join(base_path, date_range)
     save_path = get_destination_dir(os.path.join(base_path, file_name), folder)
-
-    if os.path.exists(save_path):
+    save_path_not_found = save_path + '.404'
+    if os.path.exists(save_path) or os.path.exists(save_path_not_found):
         print("\nfile already exists! {}".format(save_path))
         return
 
@@ -71,8 +71,10 @@ def download_file(base_path, file_name, date_range=None, folder=None):
                 sys.stdout.write("\r[%s%s]" % ('#' * done, '.' * (50 - done)))
                 sys.stdout.flush()
 
-    except urllib.error.HTTPError:
-        print("\nFile not found: {}".format(download_url))
+    except Exception as e:
+        print("\nFile not found: {}, {}".format(download_url, e))
+        with open(save_path_not_found, 'w') as out_file:
+            out_file.write("404")
         pass
 
 
