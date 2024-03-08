@@ -175,6 +175,10 @@ def get_parser(parser_type):
     parser.add_argument(
         '--njobs', dest='njobs', default=1, type=int,
         help='Number of jobs to run in parallel, default 1')
+    parser.add_argument(
+        '--proxy', dest='proxy', default=None, type=str,
+        help='set proxy'
+    )
 
     if parser_type == 'klines':
         parser.add_argument(
