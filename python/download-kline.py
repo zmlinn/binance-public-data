@@ -100,7 +100,7 @@ if __name__ == "__main__":
     args = parser.parse_args(sys.argv[1:])
     if args.proxy:
         os.environ['http_proxy'] = 'http://{}'.format(args.proxy)
-        os.environ['https_proxy'] = 'https://{}'.format(args.proxy)
+        os.environ['https_proxy'] = 'http://{}'.format(args.proxy)
         print(f'set proxy: {args.proxy}')
 
     if not args.symbols:
