@@ -7,6 +7,8 @@ import urllib.request
 from argparse import ArgumentParser, RawTextHelpFormatter, ArgumentTypeError
 from pathlib import Path
 
+import pandas as pd
+
 from enums import *
 
 
@@ -33,7 +35,7 @@ def get_all_symbols(type):
     return list(map(lambda symbol: symbol['symbol'], json.loads(response)['symbols']))
 
 
-def download_file(base_path, file_name, date_range=None, folder=None):
+def download_file(base_path, file_name, date_range=None, folder=None, overwrite=0):
     download_path = "{}{}".format(base_path, file_name)
     if folder:
         base_path = os.path.join(folder, base_path)
@@ -43,7 +45,7 @@ def download_file(base_path, file_name, date_range=None, folder=None):
     save_path = get_destination_dir(os.path.join(base_path, file_name), folder)
     save_path_tmp = save_path + '.tmp'
     save_path_not_found = save_path + '.404'
-    if os.path.exists(save_path) or os.path.exists(save_path_not_found):
+    if (os.path.exists(save_path) or os.path.exists(save_path_not_found)) and not overwrite:
         print("\nfile already exists! {}".format(save_path))
         return
 
@@ -82,9 +84,7 @@ def download_file(base_path, file_name, date_range=None, folder=None):
 
 
 def convert_to_date_object(d):
-    year, month, day = [int(x) for x in d.split('-')]
-    date_obj = date(year, month, day)
-    return date_obj
+    return pd.to_datetime(d)
 
 
 def get_start_end_date_objects(date_range):
@@ -142,13 +142,13 @@ def get_parser(parser_type):
         '-m', dest='months', default=MONTHS, nargs='+', type=int, choices=MONTHS,
         help='Single month or multiple months separated by space\n-m 2 12 means to download {} from feb and dec'.format(parser_type))
     parser.add_argument(
-        '-d', dest='dates', nargs='+', type=match_date_regex,
+        '-d', dest='dates', nargs='+', type=match_date_regex, default=None,
         help='Date to download in [YYYY-MM-DD] format\nsingle date or multiple dates separated by space\ndownload from 2020-01-01 if no argument is parsed')
     parser.add_argument(
-        '-startDate', dest='startDate', type=match_date_regex,
+        '-startDate', dest='startDate',
         help='Starting date to download in [YYYY-MM-DD] format')
     parser.add_argument(
-        '-endDate', dest='endDate', type=match_date_regex,
+        '-endDate', dest='endDate',
         help='Ending date to download in [YYYY-MM-DD] format')
     parser.add_argument(
         '-folder', dest='folder', type=check_directory,
@@ -178,6 +178,10 @@ def get_parser(parser_type):
     parser.add_argument(
         '--proxy', dest='proxy', default=None, type=str,
         help='set proxy'
+    )
+    parser.add_argument(
+        '--overwrite', dest='overwrite', default=0, type=int, choices=[0, 1],
+        help='1 to overwrite the existing folder, default 0'
     )
 
     if parser_type == 'klines':
